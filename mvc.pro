@@ -13,9 +13,11 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    delegate.cpp
 
 HEADERS  += mainwindow.h \
-    connection.h
+    connection.h \
+    delegate.h
 
 FORMS    += mainwindow.ui

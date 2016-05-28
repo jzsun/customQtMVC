@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "delegate.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -12,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     m_stuModel->select();
 
     ui->tableView->setModel(m_stuModel);
+    ui->tableView->setItemDelegate(new ItemDelegate());
 }
 
 MainWindow::~MainWindow()
