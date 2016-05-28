@@ -6,6 +6,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
+    m_stuModel = new QSqlTableModel;
+    m_stuModel->setTable("stu");
+    m_stuModel->select();
+
+    ui->tableView->setModel(m_stuModel);
 }
 
 MainWindow::~MainWindow()
