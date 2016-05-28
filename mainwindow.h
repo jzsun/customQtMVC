@@ -3,7 +3,6 @@
 
 #include <QMainWindow>
 #include <QSqlTableModel>
-#include "sqltablemodel.h"
 
 namespace Ui {
 class MainWindow;

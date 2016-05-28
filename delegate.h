@@ -45,8 +45,6 @@
 #include <QModelIndex>
 #include <QObject>
 #include <QSize>
-#include <QSpinBox>
-
 
 class ItemDelegate : public QItemDelegate
 {
@@ -55,7 +53,7 @@ class ItemDelegate : public QItemDelegate
 public:
     ItemDelegate(QObject *parent = 0);
 
-    //返回一个编辑控件，用来编辑指定项的数据
+    //返回一个编辑控件，用来编辑指定lie的数据
     QWidget *createEditor(QWidget *parent, const QStyleOptionViewItem &option,
                           const QModelIndex &index) const;
     //将Model中数据赋值到控件上
@@ -69,4 +67,14 @@ public:
 };
 
 
+class sexItemDelegate: public QItemDelegate
+{
+  Q_OBJECT
+
+public:
+    sexItemDelegate(QObject* parent = 0);
+
+    void paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const;
+
+};
 #endif

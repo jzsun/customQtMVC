@@ -77,7 +77,7 @@ void ItemDelegate::setEditorData(QWidget *editor,
         return;
     }
     //返回该索引的模型，继而返回该模型中此索引的编辑角色数据
-    int value = index.model()->data(index, Qt::EditRole).toInt();
+    int value = index.model()->data(index, Qt::UserRole).toInt();
     //给控件赋值
     QComboBox *comBox = static_cast<QComboBox*>(editor);
     if (value == 1) {
@@ -96,9 +96,9 @@ void ItemDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
     }
 
     QComboBox *comBox = static_cast<QComboBox*>(editor);
-    QString value = comBox->currentText();
+    int value = comBox->currentIndex();
     //设置模型的数据
-    model->setData(index, value, Qt::EditRole);
+    model->setData(index, value, Qt::UserRole);
 }
 //更新编辑框几何形状
 void ItemDelegate::updateEditorGeometry(QWidget *editor,
@@ -108,3 +108,33 @@ void ItemDelegate::updateEditorGeometry(QWidget *editor,
     editor->setGeometry(option.rect);
 }
 
+
+sexItemDelegate::sexItemDelegate(QObject *parent):
+    QItemDelegate(parent)
+{
+
+}
+
+void sexItemDelegate::paint(QPainter *painter, const QStyleOptionViewItem &option, const QModelIndex &index) const
+{
+    if (index.column() == 2) {
+        int sexID =  index.model()->data(index, Qt::DisplayRole).toInt();
+        QString sexStr;
+        if (sexID == 0) {
+            sexStr = "nv";
+        } else if (sexID == 1) {
+            sexStr = "nan";
+        } else {
+            sexStr = "unknow";
+        }
+
+        //获取项风格设置
+        QStyleOptionViewItem myOption = option;
+        myOption.displayAlignment = Qt::AlignRight | Qt::AlignVCenter;
+        //绘制文本
+        drawDisplay(painter, myOption, myOption.rect, sexStr);
+    } else{
+        //否则默认
+        QItemDelegate::paint(painter, option, index);
+    }
+}
